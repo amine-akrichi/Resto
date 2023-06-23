@@ -1,0 +1,500 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage
+{% endblock %}
+
+{% block body %}
+	<style>
+
+		nav {
+			width: 100%;
+			height: 10vh;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			align-items: center;
+			position: fixed;
+			background: #FFFFFF;
+			top: 0;
+			margin: 0;
+			box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+			z-index: 5;
+			text-align: center;
+		}
+
+		#logo {
+			align-self: center;
+			justify-self: center;
+
+		}
+		nav ul {
+			list-style: none;
+			display: flex;
+			height: 1vh;
+		}
+		nav ul li a {
+			align-self: center;
+			justify-self: center;
+			text-decoration: none;
+			margin: 2vw;
+			color: black;
+			font-size: 20px;
+			border-bottom: 3px transparent;
+			transition: border-bottom-color 0.3s ease-in;
+			text-align: center;
+		}
+		nav ul li a:hover {
+			border-bottom: 3px solid #ffb400;
+		}
+
+		.home-page {
+			height: 200vh;
+		}
+
+		.hero-div {
+			height: 100vh;
+			background: url({{asset('assets/hero-div-background.jpg')}}) no-repeat 50% 50%;
+			background-size: cover;
+			background-attachment: fixed;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.hero-div H1 {
+			text-align: center;
+			font-size: 100px;
+			color: white;
+			margin: 5vh;
+		}
+
+		.hero-div a {
+			position: absolute;
+			bottom: 10px;
+		}
+		.menu-div {
+			background: #FFFFFF;
+			padding: 5vw;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+		.menu-wrapper {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center
+		}
+		.scroll-btn:hover {
+			cursor: pointer;
+		}
+		.menu-div section {
+			width: 100%;
+			display: flex;
+			flex-wrap: nowrap;
+			justify-content: flex-start;
+			overflow-x: auto;
+		}
+		.menu-div section::-webkit-scrollbar-track {
+			background: #EEEEEE;
+		}
+		.menu-div H1 {
+			text-align: center;
+			font-size: 60px;
+			margin-bottom: 15vh;
+		}
+		.menu-card {
+			flex: 0 0 580px;
+			height: 200px;
+			color: black;
+			margin: 20px;
+			box-shadow: rgba(100, 100, 111, 0.2) 0 2px 29px 0;
+			transition: 0.6s ease;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			padding: 2vh;
+		}
+
+		.menu-card:hover {
+			background-color: #ffb400;
+		}
+
+		.menu-card img {
+			height: 150px;
+			width: 150px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+
+		.card-body {
+			margin: 2vh;
+
+			height: 180px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		#card-title {
+			font-size: 26px;
+			text-align: left;
+
+		}
+		#card-desc {
+			color: #404044;
+			font-size: 16px;
+		}
+
+		#card-price {
+			font-size: 24px;
+		}
+
+		.reservation-div {
+			height: 100vh;
+			background: #FFFFFF;
+			padding: 5vw;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+		}
+		.reservation-div H1 {
+			text-align: center;
+			font-size: 60px;
+			margin-bottom: 15vh;
+		}
+
+		.form-control {
+			height: 52px !important;
+			background: #fff !important;
+			color: #404044 !important;
+			font-size: 18px;
+			border-radius: 0;
+			-webkit-box-shadow: none !important;
+			box-shadow: none !important;
+		}
+
+		.reservation-div .form-group label {
+			font-weight: 600;
+			color: #404044;
+		}
+
+		.reservation-div section {
+			display: grid;
+			grid-template-columns: 2fr 3fr;
+		}
+
+		.reservation-img-div {
+			margin-right: 50px;
+			background: url({{asset('assets/reservation-img.jpg')}}) no-repeat 50% 50%;
+			background-size: cover;
+
+		}
+
+		.chef-div {
+			height: 100vh;
+			background: #FFFFFF;
+			padding: 5vw;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.chef-div H1 {
+			text-align: center;
+			font-size: 60px;
+			margin-bottom: 15vh;
+		}
+
+		.chef-container {
+			display: flex;
+			flex-direction: row;
+		}
+
+		.chef-container img {
+			width: 40vw;
+			height: 50vh;
+			object-fit: cover;
+		}
+
+		.chef-card-container {
+			margin: 2vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+		}
+
+		.chef-card-container p {
+			font-size: 18px;
+			color: #404044;
+		}
+
+		#chef-title {
+			font-size: 32px;
+			margin-bottom: 2vh;
+		}
+
+
+		#footer {
+			height: 100vh !important;
+			background: #404044;
+		}
+
+		.ftco-footer {
+			font-size: 16px;
+			background: #27272b;
+			padding: 8em 0;
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.ftco-section {
+			padding: 7em 0;
+			position: relative;
+		}
+		.btn.btn-primary {
+			background: red;
+			border-radius: 0 !important;
+			border: 2px solid #ffb400;
+			color: #fff;
+		}
+	</style>
+
+	<nav>
+		<div id="logo">
+			<img height="60" src="{{asset('assets/restaurant-icon.svg')}}">
+		</div>
+
+		<ul>
+			<li><a href="#hero-div">Home</a></li>
+			<li><a href="#menu-div">Menu</a></li>
+			<li><a href="#chef-div">Chef</a></li>
+			<li><a href="#reservation-div">Reservation</a></li>
+			<li><a href="#footer">A propos</a></li>
+			<li><a href="/login">admin</a></li>
+		</ul>
+	</nav>
+	<div class="home-page">
+		<div class="hero-div" id="hero-div">
+			<h1>Bienvenue.</h1>
+			<a href="#menu-div"><img height="100" src="{{asset('assets/scroll-bottom-icon.svg')}}"/></a>
+		</div>
+		<div class="menu-div" id="menu-div">
+			<h1>Notre Menu</h1>
+			<div class="menu-wrapper">
+				<img class="scroll-btn" id="scroll-left" height="60" src="{{asset('assets/scroll-left-icon.svg')}}">
+				<section id="scroll-section">
+					{% for item in menuItems %}
+						<div class="menu-card">
+							<img src="{{ 'uploads/' }}{{ item.getImageUrl }}">
+							<div class="card-body">
+								<span id="card-title">{{ item.getTitle }}</span>
+								<p id="card-desc">{{ item.getDescription }}
+								</p>
+								<span id="card-price">{{ item.getPrice }}
+									TND</span>
+							</div>
+						</div>
+					{% endfor %}
+				</section>
+				<img class="scroll-btn" id="scroll-right" height="60" src="{{asset('assets/scroll-right-icon.svg')}}">
+			</div>
+		</div>
+		<div class="chef-div" id="chef-div">
+			<h1>Notre Chef</h1>
+			<section>
+				<article class="chef-container">
+					<img src="{{asset('assets/chef.jpg')}}">
+					<div class="chef-card-container">
+						<span id="chef-title">Notre chef cuisinier vous prépare les plats les plus délicieux.</span>
+						<p>Notre chef est un véritable virtuose culinaire, transformant des ingrédients ordinaires en créations gastronomiques extraordinaires. Avec sa dévotion sans faille envers son art, il apporte passion, innovation et une technique impeccable à chaque plat qu'il crée. Sa maîtrise culinaire est à la hauteur de son engagement à offrir des saveurs exceptionnelles et des présentations exquises. L'art culinaire de notre chef est un véritable régal pour les sens, nous laissant émerveillés par son talent et impatients de découvrir sa prochaine œuvre d'art gastronomique.</p>
+					</div>
+				</article>
+			</section>
+		</div>
+		<div class="reservation-div" id="reservation-div">
+			<h1>Faire une Reservation</h1>
+
+			<section>
+				<div class="reservation-img-div"></div>
+				<form class="form" action="{{ path('app_home') }}" method="POST">
+					{{ form_start(form) }}
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								{{ form_label(form.ClientName) }}
+								{{ form_widget(form.ClientName, {'attr': {'class': 'form-control', 'placeholder': 'Votre Nom'}}) }}
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								{{ form_label(form.ClientEmail) }}
+								{{ form_widget(form.ClientEmail, {'attr': {'class': 'form-control', 'placeholder': 'Votre Email'}}) }}
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								{{ form_label(form.ClientPhone) }}
+								{{ form_widget(form.ClientPhone, {'attr': {'class': 'form-control', 'placeholder': 'Tel'}}) }}
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								{{ form_label(form.ReservationDate) }}
+								{{ form_widget(form.ReservationDate, {'attr': {'class': 'form-control', 'placeholder': 'Date'}}) }}
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								{{ form_label(form.ReservationTime) }}
+								{{ form_widget(form.ReservationTime, {'attr': {'class': 'form-control', 'placeholder': 'Heure', 'autocomplete': 'off'}}) }}
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								{{ form_label(form.NumberOfPersons) }}
+								{{ form_widget(form.NumberOfPersons, {'attr': {'class': 'form-control'}}) }}
+							</div>
+						</div>
+						<div class="col-md-12 mt-3">
+							<div class="form-group">
+								{{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary py-3 px-5'}}) }}
+							</div>
+						
+						</div>
+					</div>
+					{{ form_end(form) }}
+				</form>
+
+			</section>
+		</div>
+		<div>
+			<footer id="footer" class="ftco-footer ftco-bg-dark ftco-section">
+				<div class="container">
+					<div class="row mb-5">
+						<div class="col-md">
+							<div class="ftco-footer-widget mb-4">
+								<h2 class="ftco-heading-2">Ramino</h2>
+								<p>Un restaurant dynamique et contemporain proposant une palette de saveurs du monde entier. Des ingrédients locaux de qualité, un service exceptionnel et une expérience culinaire mémorable vous attendent. Dégustez nos plats innovants et nos sélections de boissons exquises chez Ranimo.</p>
+								<ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+									<li class="ftco-animate fadeInUp ftco-animated">
+										<a href="#">
+											<span class="icon-twitter"></span>
+										</a>
+									</li>
+									<li class="ftco-animate fadeInUp ftco-animated">
+										<a href="#">
+											<span class="icon-facebook"></span>
+										</a>
+									</li>
+									<li class="ftco-animate fadeInUp ftco-animated">
+										<a href="#">
+											<span class="icon-instagram"></span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md">
+							<div class="ftco-footer-widget mb-4">
+								<h2 class="ftco-heading-2">Horaire</h2>
+								<ul class="list-unstyled">
+									<li>
+										<span href="#" class="py-2 d-block">Lundi:
+											<span>08: - 22:00</span>
+										</span>
+									</li>
+									<li>
+										<span href="#" class="py-2 d-block">Mardi:
+											<span>08: - 22:00</span>
+										</span>
+									</li>
+									<li>
+										<span href="#" class="py-2 d-block">Mercredi:
+											<span>08: - 22:00</span>
+										</span>
+									</li>
+									<li>
+										<span href="#" class="py-2 d-block">Jeudi:
+											<span>08: - 22:00</span>
+										</span>
+									</li>
+									<li>
+										<span href="#" class="py-2 d-block">Venredi:
+											<span>08: - 22:00</span>
+										</span>
+									</li>
+									<li>
+										<span href="#" class="py-2 d-block">Samedi:
+											<span>08: - 22:00</span>
+										</span>
+									</li>
+									<li>
+										<span class="py-2 d-block">Dimaanche:
+											<span>08: - 22:00</span>
+										</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md">
+							<div class="ftco-footer-widget mb-4">
+								<h2 class="ftco-heading-2">Contact</h2>
+								<ul class="list-unstyled">
+									<li>
+										<a href="#" class="py-2 d-block">198 West 21th Street, Suite 721 New York NY 10016</a>
+									</li>
+									<li>
+										<a href="#" class="py-2 d-block">+ 1235 2355 98</a>
+									</li>
+									<li>
+										<a href="#" class="py-2 d-block">info@yoursite.com</a>
+									</li>
+									<li>
+										<a href="#" class="py-2 d-block">email@email.com</a>
+									</li>
+									<li>
+										<a href="/login" target="_blank">Espace admin</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md">
+							<div class="ftco-footer-widget mb-4">
+								<h2 class="ftco-heading-2">Newsletter</h2>
+								<p>Far far away, behind the word mountains, far from the countries.</p>
+								<form action="#" class="subscribe-form">
+									<div class="form-group">
+										<span class="icon icon-paper-plane"></span>
+										<input type="text" class="form-control" placeholder="Subscribe">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+
+	<script>
+		let rightBtn = document.getElementById("scroll-right");
+let leftBtn = document.getElementById("scroll-left")
+
+rightBtn.onclick = function () {
+document.getElementById("scroll-section").scrollLeft += 620;
+}
+leftBtn.onclick = function () {
+document.getElementById("scroll-section").scrollLeft -= 620;
+}
+	</script>
+
+{% endblock %}

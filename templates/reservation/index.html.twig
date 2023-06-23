@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+    <style>
+        th {
+            padding: 5px;
+            text-align: left;
+            color: #ffb400;
+        }
+       
+    </style>
+    <a class="btn btn-outline-primary m-5" href="/menu/item">Menu</a>
+    <a class="btn btn-outline-danger m-5" href="/">Logout</a>
+
+    <a class="btn btn-outline-secondary m-5" href="/">SITE</a>
+    <div class="m-5">
+        <h1>Reservation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ClientName</th>
+                <th>ClientEmail</th>
+                <th>ClientPhone</th>
+                <th>ReservationDate</th>
+                <th>ReservationTime</th>
+                <th>NumberOfPersons</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.ClientName }}</td>
+                <td>{{ reservation.ClientEmail }}</td>
+                <td>{{ reservation.ClientPhone }}</td>
+                <td>{{ reservation.ReservationDate }}</td>
+                <td>{{ reservation.ReservationTime }}</td>
+                <td>{{ reservation.NumberOfPersons }}</td>
+                <td>
+                    <a  class="btn btn-outline-secondary" href="{{ path('app_reservation_show', {'id': reservation.id}) }}">show</a>
+                    <a   class="btn btn-outline-success"href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    
+
+    <a class="btn btn-outline-primary" href="{{ path('app_reservation_new') }}">Create new</a>
+{% endblock %}

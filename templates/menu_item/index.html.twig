@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menu{% endblock %}
+
+{% block body %}
+    <style>
+        th {
+            padding: 5px;
+            text-align: left;
+            color: #ffb400;
+        }
+       
+    </style>
+    <a class="btn btn-outline-primary m-5" href="/reservation">Reservation</a>
+    <a class="btn btn-outline-danger m-5" href="/">Logout</a>
+
+
+    <a class="btn btn-outline-success m-5" href="/">SITE</a>
+    <div class="m-5">
+        <h1>Menu</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>ImageUrl</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for menu_item in menu_items %}
+                <tr>
+                 
+                    <td>{{ menu_item.title }}</td>
+                    <td>{{ menu_item.description }}</td>
+                    <td>{{ menu_item.price }}</td>
+                    <td>{{ menu_item.imageUrl }}</td>
+                    <td>
+                        <a class="btn btn-outline-secondary" href="{{ path('app_menu_item_show', {'id': menu_item.id}) }}">show</a>
+                        <a class="btn btn-outline-success" href="{{ path('app_menu_item_edit', {'id': menu_item.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a class="btn btn-outline-primary" href="{{ path('app_menu_item_new') }}">Create new</a>
+
+    </div>
+{% endblock %}

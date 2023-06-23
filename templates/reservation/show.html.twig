@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation
+{% endblock %}
+
+{% block body %}
+	<h1>Reservation</h1>
+	<style>
+		th {
+			padding: 5px;
+			text-align: left;
+			color: #ffb400;
+		}
+	</style>
+    <a class="btn btn-outline-primary m-5" href="{{ path('app_reservation_index') }}">back to list</a>
+	<div class="m-5">
+        <h1>Reservations</h1>
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ reservation.id }}</td>
+				</tr>
+				<tr>
+					<th>ClientName</th>
+					<td>{{ reservation.ClientName }}</td>
+				</tr>
+				<tr>
+					<th>ClientEmail</th>
+					<td>{{ reservation.ClientEmail }} <a class="btn btn-primary" href="mailto:{{ reservation.ClientEmail }}">Envoyer Un Email</a></td>
+				</tr>
+				<tr>
+					<th>ClientPhone</th>
+					<td>{{ reservation.ClientPhone }} <a class="btn btn-primary" href="tel:{{ reservation.ClientPhone }}">Appeler le client</a></td>
+				</tr>
+				<tr>
+					<th>ReservationDate</th>
+					<td>{{ reservation.ReservationDate }}</td>
+				</tr>
+				<tr>
+					<th>ReservationTime</th>
+					<td>{{ reservation.ReservationTime }}</td>
+				</tr>
+				<tr>
+					<th>NumberOfPersons</th>
+					<td>{{ reservation.NumberOfPersons }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	
+
+	<a class="btn btn-outline-success m-2" href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
+
+	{{ include('reservation/_delete_form.html.twig') }}
+{% endblock %}
